@@ -7,8 +7,11 @@ public class Options {
 	 * on va le faire pour plus de commodite!!!
 	 * On va faire appel a lui dans jeu
 	 * */
-	public Options(Jeu jeu) {
+	public Options(Jeu jeu, boolean affOption) {
 		this.jeu = jeu;		// On creait le jeu...
+		if(affOption) {
+			InterfaceOption linterface = new InterfaceOption(this, affOption);
+		}
 	}
 	
 	/** R�gle les dimensions du jeu

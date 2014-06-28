@@ -65,7 +65,8 @@ public class InterfaceOption extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	/** FIN public OptionsGUI(Options loption) */
-	
+
+
 	/** Methode pour bien mettre les boutons, textfields... 
 	 * tire forum
 	 * */

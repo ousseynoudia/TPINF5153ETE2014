@@ -86,7 +86,10 @@ public class Grille extends JFrame implements MouseListener, ActionListener, Win
 		}	
 	}
 	
-	
+	/*public void actionPerformed(ActionEvent actionEvent) {
+		
+	}
+	*/
 	/** METHODES A IMPLEMENTER */
 	@Override
 	public void windowActivated(WindowEvent arg0) {
@@ -131,8 +134,14 @@ public class Grille extends JFrame implements MouseListener, ActionListener, Win
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent actionEvent) {
+		JButton bouttonValider = (JButton)actionEvent.getSource();
+		if (bouttonValider == Jdemarrer) {
+			dispose();		// On ferme la fenetre precedente
+			Jeu.gameOrOption(1);
+		}else if(bouttonValider == Jconfigurer) {
+			Jeu.gameOrOption(0);
+		}
 		
 	}
 
