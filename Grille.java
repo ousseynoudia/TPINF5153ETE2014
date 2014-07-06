@@ -1,4 +1,5 @@
 import java.awt.*;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -10,6 +11,7 @@ public class Grille extends JFrame implements MouseListener, ActionListener, Win
 	 * Meilleur design des pions (le cercle)
 	 */
 	private static final long serialVersionUID = 1L; //
+	//public static int nbrGrilles;
 
 	/** Creation composant de linterface du jeu */
 	JPanel ensGrille = new JPanel(); // l'ensemble du jeu
@@ -86,10 +88,6 @@ public class Grille extends JFrame implements MouseListener, ActionListener, Win
 		}	
 	}
 	
-	/*public void actionPerformed(ActionEvent actionEvent) {
-		
-	}
-	*/
 	/** METHODES A IMPLEMENTER */
 	@Override
 	public void windowActivated(WindowEvent arg0) {
@@ -128,9 +126,8 @@ public class Grille extends JFrame implements MouseListener, ActionListener, Win
 	}
 
 	@Override
-	public void windowClosing(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+			System.exit(-1);
 	}
 
 	@Override
@@ -154,19 +151,38 @@ public class Grille extends JFrame implements MouseListener, ActionListener, Win
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		Pion lepion = (Pion)e.getSource();
+		if(lepion.leJeu.enCours) {
+			int laColonn = lepion.nbColonnes;
+			int laLign = lepion.leJeu.rechercheLignJouabl(laColonn);
+			if(laLign!=-1) {
+				Pion pion = (Pion)lepion.leJeu.plateauJeu.aireJeu.getComponent((lepion.leJeu.option.getColJeu()) * (laLign-1)+(laColonn-1));
+				pion.modifierCouleur(new Color(198, 198, 242));
+				repaint();
+			}
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		Pion lepion = (Pion)e.getSource();
+		if(lepion.leJeu.enCours) {
+			int laColonn = lepion.nbColonnes;
+			int laLign = lepion.leJeu.rechercheLignJouabl(laColonn);
+			if(laLign!=-1) {
+				Pion pion = (Pion)lepion.leJeu.plateauJeu.aireJeu.getComponent((lepion.leJeu.option.getColJeu()) * (laLign-1)+(laColonn-1));
+				pion.modifierCouleur(Color.WHITE);
+				repaint();
+			}
+		}
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		Pion lepion = (Pion)e.getSource();
+		lepion.leJeu.jouer(lepion.nbColonnes);		
 	}
 
 	@Override

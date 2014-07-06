@@ -18,6 +18,7 @@ public class InterfaceOption extends JFrame implements ActionListener {
 	JTextField nbrColonTexF = new JTextField("7", 2);
 	
 	JCheckBox siOrdiJoue = new JCheckBox("Jouer contre l'ordinateur", false);	
+	JCheckBox posPion = new JCheckBox("Position pion en bas", true);	
 	JButton ok = new JButton("Jouer");
 	
 	/** On creait l'instance comme ca on pourra initialiser l'instance de l'option */
@@ -40,7 +41,9 @@ public class InterfaceOption extends JFrame implements ActionListener {
 			/** On creait le checkBox et on le positionne */
 			JPanel computerPane = new JPanel(new GridLayout(4, 1));
 			computerPane.add(siOrdiJoue);
+			computerPane.add(posPion);		//-----------------------
 			siOrdiJoue.addActionListener(this);
+			posPion.addActionListener(this);	//--------------------------
 			ajustePosit(laPosit, 0, 1, 2, 1, 0, 20);
 			lagrilleLay.setConstraints(computerPane, laPosit);
 			plateauPane.add(computerPane);    
@@ -60,7 +63,7 @@ public class InterfaceOption extends JFrame implements ActionListener {
 			this.option = loption;
 		}else{	//-----------------------------------------------------------------------------------
 			this.option = loption;
-			option.changeTaille(1, 1, true);
+			option.changeTaille(1, 1, true, posPion.isSelected());
 		}//--------------------------------------------------------------------
 		setVisible(true);
 	}
@@ -92,7 +95,7 @@ public class InterfaceOption extends JFrame implements ActionListener {
 				int nbCOL = Integer.parseInt(nbrColonTexF.getText());
 				if (nbLIGN <= 0 || nbCOL <= 0)
 					throw new NumberFormatException();
-					option.changeTaille(nbLIGN, nbCOL, true);
+					option.changeTaille(nbLIGN, nbCOL, true, posPion.isSelected());
 				
 				setVisible(false);
 				
